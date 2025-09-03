@@ -103,5 +103,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-{{-   include ".zshrc_history" -}}
-{{-   include ".zshrc_custom" -}}
+
+
+{{ if eq .chezmoi.os "darwin" }}
+{{-   include ".zshrc_custom_mac" -}}
+{{ else if eq .chezmoi.osRelease.id "ubuntu" }}
+{{-   include ".zshrc_custom_ubuntu" -}}
+{{ end }}
+

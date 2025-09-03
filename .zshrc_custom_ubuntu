@@ -1,0 +1,1 @@
+export SSH_AUTH_SOCK=/home/michael/snap/bitwarden/current/.bitwarden-ssh-agent.sock 
