@@ -1,7 +1,28 @@
-
 {{ if eq .chezmoi.os "darwin" }}
-{{-   include ".zshrc_custom_mac" -}}
+{{-   include "zshrc_custom_mac" -}}
 {{ else if eq .chezmoi.osRelease.id "ubuntu" }}
-{{-   include ".zshrc_custom_ubuntu" -}}
+{{-   include "zshrc_custom_ubuntu.tmpl" -}}
 {{ end }}
 
+# History and Shell Configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Better History Behavior
+setopt SHARE_HISTORY          # Share history between sessions
+setopt HIST_IGNORE_DUPS       # Don't record duplicates
+setopt HIST_REDUCE_BLANKS     # Remove unnecessary blanks
+setopt HIST_IGNORE_SPACE      # Don't record commands starting with a space (e.g. for secrets)
+
+# Shell Options and Navigation
+setopt autocd                 # Change directory by typing the name
+setopt extendedglob           # Advanced globbing
+setopt nomatch                # Error if no match for glob
+setopt notify                 # Report status of background jobs immediately
+bindkey -v                    # Vi mode
+
+# Completion System
+zstyle :compinstall filename '{{ .chezmoi.homeDir }}/.zshrc'
+autoload -Uz compinit
+compinit
