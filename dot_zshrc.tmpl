@@ -1,9 +1,3 @@
-{{ if eq .chezmoi.os "darwin" }}
-{{-   include "zshrc_custom_mac" -}}
-{{ else if eq .chezmoi.osRelease.id "ubuntu" }}
-{{-   include "zshrc_custom_ubuntu.tmpl" -}}
-{{ end }}
-
 # History and Shell Configuration
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -26,3 +20,10 @@ bindkey -v                    # Vi mode
 zstyle :compinstall filename '{{ .chezmoi.homeDir }}/.zshrc'
 autoload -Uz compinit
 compinit
+
+{{ if eq .chezmoi.os "darwin" }}
+{{-   include "zshrc_custom_mac" -}}
+{{ else if eq .chezmoi.osRelease.id "ubuntu" }}
+{{-   include "zshrc_custom_ubuntu.tmpl" -}}
+{{ end }}
+
